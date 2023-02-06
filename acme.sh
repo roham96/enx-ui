@@ -90,13 +90,13 @@ install_acme(){
         red "Sorry, the ACME.SH certificate application script installation failed"
         green "Suggestions:"
         yellow "1. Check the server network connection"
-        yellow "2. The script could be outdated. Please open up a issue in Github at https://github.com/NidukaAkalanka/x-ui-english/issues"
+        yellow "2. The script could be outdated. Please open up a issue in Github at https://github.com/roham96/enx-ui/issues"
     fi
     back2menu
 }
 
 check_80(){
-        if [[ -z $(type -P lsof) ]]; then
+    if [[ -z $(type -P lsof) ]]; then
         if [[ ! $SYSTEM == "CentOS" ]]; then
             ${PACKAGE_UPDATE[int]}
         fi
@@ -140,9 +140,9 @@ acme_standalone(){
     if [[ -n $ipv4 && -n $ipv6 ]]; then
         echo -e "The public IPv4 address of server is: ${GREEN} $ipv4 ${PLAIN}"
         echo -e "The public IPv6 address of server is: ${GREEN} $ipv6 ${PLAIN}"
-    elif [[ -n $ipv4 && -z $ipv6 ]]; then
+        elif [[ -n $ipv4 && -z $ipv6 ]]; then
         echo -e "The public IPv4 address of server is: ${GREEN} $ipv4 ${PLAIN}"
-    elif [[ -z $ipv4 && -n $ipv6 ]]; then
+        elif [[ -z $ipv4 && -n $ipv6 ]]; then
         echo -e "The public IPv6 address of server is: ${GREEN} $ipv6 ${PLAIN}"
     fi
     echo ""
@@ -161,7 +161,7 @@ acme_standalone(){
     if [[ -n $(echo $domainIP | grep nginx) ]]; then
         yellow "The domain name analysis failed, please check whether the domain name is correctly entered, and whether the domain name has been pointed to the server's public IP address"
         exit 1
-    elif [[ -n $(echo $domainIP | grep ":") || -n $(echo $domainIP | grep ".") ]]; then
+        elif [[ -n $(echo $domainIP | grep ":") || -n $(echo $domainIP | grep ".") ]]; then
         if [[ $domainIP != $ipv4 ]] && [[ $domainIP != $ipv6 ]]; then
             if [[ -n $(type -P wg-quick) && -n $(type -P wgcf) ]]; then
                 wg-quick up wgcf >/dev/null 2>&1
@@ -171,7 +171,7 @@ acme_standalone(){
             green "Suggestions:"
             yellow "1. Please check whether domain is correctly pointed to the server's current pub;ic IP"
             yellow "2. Please make sure that Cloudflare Proxy is closed (only DNS)"
-            yellow "3. The script could be outdated. Please open up a issue in Github at https://github.com/NidukaAkalanka/x-ui-english/issues"
+            yellow "3. The script could be outdated. Please open up a issue in Github at https://github.com/roham96/enx-ui/issues"
             exit 1
         fi
     fi
@@ -248,7 +248,7 @@ checktls() {
             red "Sorry. The certificate application failed"
             green "Suggestions: "
             yellow "1. Check whether the firewall is opened. If the application mode of port 80 is used, please open or release port 80"
-            yellow "2. Applying for many times in the same domain name may subject it to the risk control of Let'sEncrypt. Please configure another domain that you own or try switching the provider by choosing 9 from the ACME script menu." 
+            yellow "2. Applying for many times in the same domain name may subject it to the risk control of Let'sEncrypt. Please configure another domain that you own or try switching the provider by choosing 9 from the ACME script menu."
             yellow "3. Try again with the above used domain after 7 days. "
             yellow "4. The script may not be able to keep up with the times, it is recommended to release screenshots to github issues to inquire "
             back2menu

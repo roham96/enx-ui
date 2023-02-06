@@ -3,7 +3,7 @@
 
 Another Translated-to-English Version of X-UI; with some of more advanced features implemented. 
  
-A furthur development from [my previous repo](https://github.com/NidukaAkalanka/x-ui-english.old) and
+A furthur development from [my previous repo](https://github.com/roham96/enx-ui.old) and
 kind a fork from [taffychan's x-ui](https://github.com/taffychan/x-ui) + [hossinasaadi's x-ui](https://github.com/hossinasaadi/x-ui), which all are forked from [vaxilu's awesome project](https://github.com/vaxilu/x-ui/) : a Multi-protocol Multi-user Xray Panel
 
 # Features
@@ -34,7 +34,7 @@ kind a fork from [taffychan's x-ui](https://github.com/taffychan/x-ui) + [hossin
 # Single Command Install & upgrade
 
 ````
-bash <(curl -Ls https://raw.githubusercontent.com/NidukaAkalanka/x-ui-english/master/install.sh)
+bash <(curl -Ls https://raw.githubusercontent.com/roham96/enx-ui/master/install.sh)
 ````
 
 ## Manual install & upgrade
@@ -44,7 +44,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/NidukaAkalanka/x-ui-english/ma
 sudo su
 cd
 ````
-2. Then download the latest compressed package from https://github.com/NidukaAkalanka/x-ui-english/releases/latest, generally choose `amd64` architecture
+2. Then download the latest compressed package from https://github.com/roham96/enx-ui/releases/latest, generally choose `amd64` architecture
 3. Run the following commands respectively:
 
 > If your server cpu architecture is not `amd64`, replace `*` in the command with another architecture
@@ -138,7 +138,7 @@ There is almost nothing to explain abount Multi-User thing. You will have sepera
 **Outcome:**
 - After about 10 seconds past disconnecting the PC, he will regain the connection for his mobile.
 
-**If it is a fresh installation, these functions, specially IP limiting, will work flowlessly. But if yours is an upgrading, they miight not work while giving XRAY status : not running. In such cases, please refer [here](https://github.com/NidukaAkalanka/x-ui-english/discussions/27)**
+**If it is a fresh installation, these functions, specially IP limiting, will work flowlessly. But if yours is an upgrading, they miight not work while giving XRAY status : not running. In such cases, please refer [here](https://github.com/roham96/enx-ui/discussions/27)**
 
 ## Suggested OSs
 
@@ -200,13 +200,13 @@ If you are looking to modify Telegram Bot functions, the Bot's code lives at `/w
 - Lack of Telegram bot implementation 
 - Release packages being much heavier in size 
 - Download traffic not being monitored
-### Fixed on 0.2.1 --
+### Fixed on 1.0.0 --
 - Download data not being calculated
 - Lack of seperate QR codes for each multi-users on VMess/Vless
 - Operation hours not being translated to English 
 - IP limitation not being worked
 - Minor bugs with Docker installation 
-### Fixed on 0.2.1.1 --
+### Fixed on 1.0.0.1 --
 - Error while swithcing Xray version
-### Fixed on 0.2.1.2 --
+### Fixed on 1.0.0.2 --
 - ip.gs error causing IP scraping errors

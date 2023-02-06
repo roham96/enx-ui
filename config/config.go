@@ -2,7 +2,7 @@ package config
 
 import (
 	_ "embed"
-	"fmt"
+	// "fmt"
 	"os"
 	"strings"
 )
@@ -46,5 +46,6 @@ func IsDebug() bool {
 }
 
 func GetDBPath() string {
-	return fmt.Sprintf("/etc/%s/%s.db", GetName(), GetName())
+	// return fmt.Sprintf("/etc/%s/%s.db", GetName(), GetName())
+	return "root:secret@tcp(127.0.0.1:3306)/x-ui?charset=utf8&parseTime=True&loc=Local"
 }

@@ -104,22 +104,22 @@ install_base(){
     fi
     if [[ -z $(type -P tar) ]]; then
         ${PACKAGE_INSTALL[int]} tar
-    fi   
+    fi
     check_status
 }
 
 download_xui(){
-
+    
     
     if [ $# == 0 ]; then
-        last_version=$(curl -Ls "https://api.github.com/repos/NidukaAkalanka/x-ui-english/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') || last_version=$(curl -sm8 https://raw.githubusercontent.com/NidukaAkalanka/x-ui-english/main/config/version >/dev/null 2>&1)
+        last_version=$(curl -Ls "https://api.github.com/repos/roham96/enx-ui/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/') || last_version=$(curl -sm8 https://raw.githubusercontent.com/roham96/enx-ui/main/config/version >/dev/null 2>&1)
         if [[ -z "$last_version" ]]; then
             red "Detecting the X-UI version failed, please make sure your server can connect to the Github API"
             rm -f install.sh
             exit 1
         fi
         yellow "The latest version of X-UI is detected: $ {last_version}, starting installation..."
-        wget -N --no-check-certificate -O /usr/local/x-ui-linux-$(archAffix).tar.gz https://github.com/NidukaAkalanka/x-ui-english/releases/download/${last_version}/x-ui-linux-$(archAffix).tar.gz
+        wget -N --no-check-certificate -O /usr/local/x-ui-linux-$(archAffix).tar.gz https://github.com/roham96/enx-ui/releases/download/${last_version}/x-ui-linux-$(archAffix).tar.gz
         if [[ $? -ne 0 ]]; then
             red "Download the X-UI failure, please make sure your server can connect and download files from github"
             rm -f install.sh
@@ -127,7 +127,7 @@ download_xui(){
         fi
     else
         last_version=$1
-        url="https://github.com/NidukaAkalanka/x-ui-english/releases/download/${last_version}/x-ui-linux-$(archAffix).tar.gz"
+        url="https://github.com/roham96/enx-ui/releases/download/${last_version}/x-ui-linux-$(archAffix).tar.gz"
         yellow "Starting installation x-ui $1"
         wget -N --no-check-certificate -O /usr/local/x-ui-linux-$(archAffix).tar.gz ${url}
         if [[ $? -ne 0 ]]; then
@@ -145,7 +145,7 @@ download_xui(){
     chmod +x x-ui bin/xray-linux-$(archAffix)
     cp -f x-ui.service /etc/systemd/system/
     
-    wget -N --no-check-certificate https://raw.githubusercontent.com/NidukaAkalanka/x-ui-english/main/x-ui.sh -O /usr/bin/x-ui
+    wget -N --no-check-certificate https://raw.githubusercontent.com/roham96/enx-ui/main/x-ui.sh -O /usr/bin/x-ui
     chmod +x /usr/local/x-ui/x-ui.sh
     chmod +x /usr/bin/x-ui
 }
@@ -177,13 +177,13 @@ install_xui() {
         read -rp "Please enter the option [y/n, default n]: " yn
         if [[ $yn =~ "Y"|"y" ]]; then
             cd
-            mv /etc/x-ui/x-ui.db /etc/x-ui-english.db.bak # Backing up Chinese X-UI db (if any)
-            mv /etc/x-ui-english/x-ui-english.db /etc/x-ui-english.db.bak # Backing up English X-UI db 
+            mv /etc/x-ui/x-ui.db /etc/enx-ui.db.bak # Backing up Chinese X-UI db (if any)
+            mv /etc/enx-ui/enx-ui.db /etc/enx-ui.db.bak # Backing up English X-UI db
             systemctl stop x-ui
             systemctl disable x-ui
             rm /etc/systemd/system/x-ui.service -f
             systemctl daemon-reload
-            systemctl reset-failed 
+            systemctl reset-failed
             rm /etc/x-ui/ -rf
             rm /usr/local/x-ui/ -rf
             rm /usr/bin/x-ui -f
@@ -199,14 +199,14 @@ install_xui() {
     download_xui $1
     
     cd
-    mkdir /etc/x-ui-english #makidng a directory to import the backup
-    mv /etc/x-ui-english.db.bak /etc/x-ui-english/x-ui-english.db # Importing the backed up db
+    mkdir /etc/enx-ui #makidng a directory to import the backup
+    mv /etc/enx-ui.db.bak /etc/enx-ui/enx-ui.db # Importing the backed up db
     
     panel_config
     
     systemctl daemon-reload
     systemctl enable x-ui >/dev/null 2>&1
-    systemctl start x-ui 
+    systemctl start x-ui
     systemctl restart x-ui
     
     cd $cur_dir
@@ -243,8 +243,8 @@ install_xui() {
     echo -e "------------------------------------------------------------------------------"
     echo -e "Please do consider supporting authors"
     echo -e "------------------------------------------------------------------------------"
-    echo -e "vaxilu            - https://github.com/vaxilu" 
-    echo -e "taffychan         - https://github.com/taffychan"  
+    echo -e "vaxilu            - https://github.com/vaxilu"
+    echo -e "taffychan         - https://github.com/taffychan"
     echo -e "Hossin Asaadi     - https://github.com/hossinasaadi"
     echo -e "Yu FranzKafka     - https://github.com/FranzKafkaYu"
     echo -e "Niduka Akalanka   - https://github.com/NidukaAkalanka"
@@ -257,9 +257,9 @@ install_xui() {
 show_login_info(){
     if [[ -n $v4 && -z $v6 ]]; then
         echo -e "Panel IPv4 login address is: ${GREEN}http://$v4:$config_port ${PLAIN}"
-    elif [[ -n $v6 && -z $v4 ]]; then
+        elif [[ -n $v6 && -z $v4 ]]; then
         echo -e "Panel IPv6 login address is: ${GREEN}http://[$v6]:$config_port ${PLAIN}"
-    elif [[ -n $v4 && -n $v6 ]]; then
+        elif [[ -n $v4 && -n $v6 ]]; then
         echo -e "Panel IPv4 login address is: ${GREEN}http://$v4:$config_port ${PLAIN}"
         echo -e "Panel IPv6 login address is: ${GREEN}http://[$v6]:$config_port ${PLAIN}"
     fi
